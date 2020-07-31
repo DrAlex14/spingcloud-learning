@@ -11,7 +11,9 @@ import java.io.Serializable;
 @Accessors(chain = true)//链式写法
 public class Order implements Serializable {
     private String name;
+
     private int typeid;
+
     private int num;
 
     private String db_source;//数据所在数据库

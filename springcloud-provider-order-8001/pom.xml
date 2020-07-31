@@ -12,6 +12,13 @@
     <artifactId>springcloud-provider-order-8001</artifactId>
 
     <dependencies>
+        <!--Eureka依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>1.4.6.RELEASE</version>
+        </dependency>
+
         <!--获取实体类-->
         <dependency>
             <groupId>com.boss</groupId>
