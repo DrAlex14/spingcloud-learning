@@ -12,6 +12,7 @@
         <module>springcloud-provider-order-8001</module>
         <module>springcloud-consumer-order-80</module>
         <module>springcloud-eureka-7001</module>
+        <module>springcloud-zull-9527</module>
     </modules>
 
     <!--打包方式 pom-->

@@ -23,4 +23,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/  #注册地址
+  instance:
+    instance-id: springcloud-provider-order-8001 #修改Eureka的默认描述信息
 

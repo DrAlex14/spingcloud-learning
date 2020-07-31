@@ -1,0 +1,23 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: springcloud-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: zuul9527.com
+    prefer-ip-address: true
+
+zuul:
+  routes:
+    myorder.serviceId: springcloud-provider-order
+    myorder.path: /myorder/**
+
+    order.serviceId: springcloud-consumer-order
+    order.path: /orderconsumer/**
+  ignored-services: springcloud-provider-order,springcloud-consumer-order  #不能再使用该路径访问
