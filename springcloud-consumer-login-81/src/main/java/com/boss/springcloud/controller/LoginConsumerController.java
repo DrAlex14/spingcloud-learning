@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Controller
 @Log4j2
 public class LoginConsumerController {
@@ -22,10 +19,6 @@ public class LoginConsumerController {
     @RequestMapping("/consumer/login")
     @ResponseBody
     public String Login(String username,String password){
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("username",username);
-        map.put("password",password);
-        log.info(map.get("password"));
-        return restTemplate.postForObject(REST_URL_PREFIX + "/user/login",map,String.class,username,password);
+        return restTemplate.getForObject(REST_URL_PREFIX + "/user/login/"+username+"/"+password,String.class);
     }
 }

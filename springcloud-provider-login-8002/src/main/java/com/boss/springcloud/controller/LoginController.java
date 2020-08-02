@@ -5,9 +5,7 @@ import com.boss.springcloud.service.LoginService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import static com.boss.springcloud.utils.DesUtil.getEncryptString;
 
@@ -19,10 +17,12 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping("/login")
+    @GetMapping("/login/{username}/{password}")
     @ResponseBody
-    public boolean login(String username,String password){
+    public String login(@PathVariable("username") String username,@PathVariable("password") String password){
         String des_username,des_password; //加密后的用户名密码
+        log.info(username);
+        log.info(password);
 
         des_username = getEncryptString(username);//对用户名加密
         des_password = getEncryptString(password);//对密码加密
@@ -31,7 +31,7 @@ public class LoginController {
         log.info(des_password);
 
         User realuser = loginService.queryForUser(des_username,des_password);
-        if(realuser != null) return true;
-        return false;
+        if(realuser != null) return "登录成功";
+        return "登录失败";
     }
 }
