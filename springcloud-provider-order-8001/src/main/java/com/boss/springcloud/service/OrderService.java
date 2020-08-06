@@ -1,10 +1,17 @@
 package com.boss.springcloud.service;
 
-import com.boss.springcloud.entity.Order;
+import com.boss.springcloud.entity.dto.OrderDto;
+
 import java.util.List;
 
 public interface OrderService {
-    public Order queryById(int typeid);
+    OrderDto queryById(int typeid);
 
-    public List<Order> queryAll();
+    List<OrderDto> queryAll();
+
+    void delete(int typeid);
+
+    void update(int typeid,int num);
+
+    void add(String name,int typeid,int num);
 }

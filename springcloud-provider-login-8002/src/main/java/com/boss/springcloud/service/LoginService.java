@@ -1,8 +1,8 @@
 package com.boss.springcloud.service;
 
-import com.boss.springcloud.entity.User;
+import com.boss.springcloud.entity.dto.UserDto;
 
 public interface LoginService {
 
-    public User queryForUser(String username,String password);
+    UserDto queryForUser(String username, String password);
 }

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.boss.springcloud.dao.OrderDao">
+    <insert id="add">
+       insert into order.order values (#{param1},#{param2},#{param3},DATABASE())
+    </insert>
 
-    <select id="queryById" parameterType="int" resultType="com.boss.springcloud.entity.Order">
+    <update id="update" parameterType="int">
+        update order.order set num = #{param2} where typeid = #{param1};
+    </update>
+
+    <delete id="delete">
+        delete from order.order where typeid = #{typeid};
+    </delete>
+
+    <select id="queryById" parameterType="int" resultType="com.boss.springcloud.entity.po.OrderPo">
       select * from order.order where typeid = #{typeid};
     </select>
 
-    <select id="queryAll" resultType="com.boss.springcloud.entity.Order">
+    <select id="queryAll" resultType="com.boss.springcloud.entity.po.OrderPo">
         select * from order.order;
     </select>
 

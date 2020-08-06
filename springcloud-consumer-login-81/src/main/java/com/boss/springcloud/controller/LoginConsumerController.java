@@ -21,4 +21,5 @@ public class LoginConsumerController {
     public String Login(String username,String password){
         return restTemplate.getForObject(REST_URL_PREFIX + "/user/login/"+username+"/"+password,String.class);
     }
+
 }

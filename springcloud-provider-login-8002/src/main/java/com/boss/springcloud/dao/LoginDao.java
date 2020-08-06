@@ -1,6 +1,6 @@
 package com.boss.springcloud.dao;
 
-import com.boss.springcloud.entity.User;
+import com.boss.springcloud.entity.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginDao {
 
-    public User queryForUser(String username,String password);
+    UserDto queryForUser(String username, String password);
 }

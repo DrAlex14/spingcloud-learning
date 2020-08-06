@@ -20,4 +20,8 @@ zuul:
 
     order.serviceId: springcloud-consumer-order
     order.path: /orderconsumer/**
+
+    login.serviceId: springcloud-consumer-login
+    login.path: /login/**
+
   ignored-services: springcloud-provider-order,springcloud-consumer-order  #不能再使用该路径访问
