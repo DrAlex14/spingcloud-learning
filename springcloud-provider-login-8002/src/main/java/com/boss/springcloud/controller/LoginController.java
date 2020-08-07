@@ -38,7 +38,8 @@ public class LoginController {
         UserVo realuser = new UserVo();
         BeanUtils.copyProperties(loginService.queryForUser(username,des_password),realuser);
         log.info("角色:"+ realuser.getRole());
-
+        if(realuser != null)
+        {
         /**
          * 试验Cookie共享用户信息
          */
@@ -56,8 +57,7 @@ public class LoginController {
         response.addCookie(usernamecookie);
 
 
-        if(realuser != null)
-        {
+
             //未来使用redis保存
             HttpSession session = request.getSession();
             session.setAttribute("username",username);
