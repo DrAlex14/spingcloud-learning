@@ -8,7 +8,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import static com.boss.springcloud.utils.DesUtil.getEncryptString;
 
@@ -22,7 +25,7 @@ public class LoginController {
 
     @GetMapping("/login/{username}/{password}")
     @ResponseBody
-    public String login(@PathVariable("username") String username, @PathVariable("password") String password, HttpServletRequest request){
+    public String login(@PathVariable("username") String username, @PathVariable("password") String password, HttpServletRequest request, HttpServletResponse response){
         String des_password; //加密后的用户名密码
 
         log.info(password);
@@ -35,6 +38,24 @@ public class LoginController {
         UserVo realuser = new UserVo();
         BeanUtils.copyProperties(loginService.queryForUser(username,des_password),realuser);
         log.info("角色:"+ realuser.getRole());
+
+        /**
+         * 试验Cookie共享用户信息
+         */
+        Cookie usernamecookie = new Cookie("username",realuser.getUsername());
+        if(realuser.getRole() == 1) {
+            Cookie rolecookie = new Cookie("role","admin");
+            rolecookie.setPath("/");
+            response.addCookie(rolecookie);
+        }else if(realuser.getRole() == 2){
+            Cookie rolecookie = new Cookie("role","check");
+            rolecookie.setPath("/");
+            response.addCookie(rolecookie);
+        }
+        usernamecookie.setPath("/");
+        response.addCookie(usernamecookie);
+
+
         if(realuser != null)
         {
             //未来使用redis保存
